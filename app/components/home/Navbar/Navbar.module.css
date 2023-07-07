@@ -1,0 +1,42 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #f5f5f500;
+}
+
+.logo {
+  margin-right: 1rem;
+}
+
+.routes {
+  display: flex;
+}
+
+.route {
+  color: white;
+  min-width: 100px;
+  border-radius: 5px;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s ease;
+}
+
+.route:hover {
+  text-decoration: none;
+  background-color: hsl(47.91deg 100% 50.39%);
+  color: white;
+}
+
+.profile {
+  margin-left: 1rem;
+  color: white;
+  min-width: 100px;
+}
+
+.navbar a {
+  text-decoration: none;
+}

@@ -1,0 +1,38 @@
+.movieposter {
+    width: 250px;
+    height: 350px;
+    border-radius: 20px;
+    transition: ease 0.3s;
+}
+
+.movieposter:hover {
+    width: 270px;
+    height: 370px;
+    border-radius: 20px;
+
+}
+
+.nowshowingtext {
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.slidercontainer {
+    margin-top: 30px;
+}
+
+.moviename {
+    display: flex;
+    justify-content: center;
+    color: white;
+    margin-top: 10px;
+}
+
+.postercontainer {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 400;
+}
