@@ -33,7 +33,7 @@ const Slider: React.FC<SliderProps> = ({ movies }) => {
       <Splide className={styles.slidercontainer} options={perPageOptions} aria-label="My Favorite Images">
         {movies.map((movie) => (
           <SplideSlide key={movie.url}>
-            <div onClick={() => router.push(`/book/${movie.name}}`)} className={styles.postercontainer}>
+            <div onClick={() => router.push(`/book/${movie.name}`)} className={styles.postercontainer}>
               <div
                 className={styles.movieposter}
                 style={{
