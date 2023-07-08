@@ -1,12 +1,12 @@
 import React from "react";
-import { Splide, SplideSlide } from "splide-nextjs/react-splide";
+// import { Splide, SplideSlide } from "splide-nextjs/react-splide";
 import "splide-nextjs/splide/dist/css/themes/splide-default.min.css";
 import styles from "./slide.module.css";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 type Movie = {
-  url: String;
-  name: String;
+  url: string;
+  name: string;
 };
 
 type SliderProps = {
@@ -17,9 +17,9 @@ const perPageOptions = {
   type: "loop",
   perPage: 3,
   perMove: 1,
-    autoplay: true,
+  autoplay: true,
   interval: 3000,
-  arrows: false,     
+  arrows: false,
   pagination: false,
 };
 
@@ -30,9 +30,10 @@ const Slider: React.FC<SliderProps> = ({ movies }) => {
       <div className={styles.nowshowingtext}>
         <h2>Now Showing</h2>
       </div>
-      <Splide className={styles.slidercontainer} options={perPageOptions} aria-label="My Favorite Images">
-        {movies.map((movie) => (
-          <SplideSlide key={movie.url}>
+      <div style={{display:"flex" , justifyContent:"space-around"}}>
+        {/* <Splide className={styles.slidercontainer} options={perPageOptions} aria-label="My Favorite Images"> */}
+        {movies.map((movie:Movie) => (
+          <div key={movie.url}>
             <div onClick={() => router.push(`/book/${movie.name}`)} className={styles.postercontainer}>
               <div
                 className={styles.movieposter}
@@ -42,9 +43,10 @@ const Slider: React.FC<SliderProps> = ({ movies }) => {
               ></div>
               <div className={styles.moviename}>{movie.name}</div>
             </div>
-          </SplideSlide>
+          </div>
         ))}
-      </Splide>
+        {/* </Splide> */}
+      </div>
     </div>
   );
 };

@@ -4,22 +4,32 @@ import styles from "../../app/styles/Home.module.css";
 import seatAvailabilityData from "../../app/components/home/seats";
 import "./book.css";
 
-const generateSeat = (array: number[], seatAvailability: {}, modifyAvailability: any) => {
+type SeatAvailability = {
+  [key: number]: boolean;
+};
+
+const generateSeat = (array: number[], seatAvailability: SeatAvailability, modifyAvailability: any) => {
   return (
     <>
-      {array.map((seat: any) => (
-        <img className="seat-area" onClick={() => modifyAvailability(seat)} key={seat} src={seatAvailability[seat] ? "/seat.png" : "/seatfilled.png"} />
+      {array.map((seat: number) => (
+        <img
+          className="seat-area"
+          onClick={() => modifyAvailability(seat)}
+          key={seat}
+          src={seatAvailability[seat] ? "/seat.png" : "/seatfilled.png"}
+          alt={`Seat ${seat}`}
+        />
       ))}
     </>
   );
 };
 
-export default function book() {
+export default function Book() {
   const router = useRouter();
   const { book } = router.query;
   console.log(book);
 
-  const [seatAvailability, setSeatAvailability] = React.useState<number[]>(seatAvailabilityData);
+  const [seatAvailability, setSeatAvailability] = React.useState<SeatAvailability>(seatAvailabilityData);
   const [available, setAvailable] = React.useState<number[]>([]);
   const [isBooked, setIsBooked] = React.useState<boolean>(false);
 
@@ -27,17 +37,17 @@ export default function book() {
     setAvailable(findAvailableSeats(seatAvailability));
   }, [seatAvailability]);
 
-  const modifyAvailability = (seatNumber: any) => {
-    let currAvailabilty = { ...seatAvailability };
-    setSeatAvailability({ ...seatAvailability, [seatNumber]: !currAvailabilty[seatNumber] });
+  const modifyAvailability = (seatNumber: number) => {
+    const currAvailability = { ...seatAvailability };
+    setSeatAvailability({ ...currAvailability, [seatNumber]: !currAvailability[seatNumber] });
   };
 
-  function findAvailableSeats(seatAvailability: number[]) {
-    const availableSeats = [];
+  function findAvailableSeats(seatAvailability: SeatAvailability) {
+    const availableSeats: number[] = [];
 
     for (const seatNumber in seatAvailability) {
       if (seatAvailability.hasOwnProperty(seatNumber) && !seatAvailability[seatNumber]) {
-        availableSeats.push(seatNumber);
+        availableSeats.push(Number(seatNumber));
       }
     }
 
@@ -50,7 +60,7 @@ export default function book() {
         <div className="theatre-map">
           <h2 className="seat-selection-header">Select your seats for {book}</h2>
           <div className="theatre-screen">
-            <img className="main-screen" src="/screen.png" />
+            <img className="main-screen" src="/screen.png" alt="Theatre screen" />
           </div>
           <div style={{ display: "flex" }}>
             <div>{generateSeat([1, 2, 3, 4, 5, 6, 7, 8, 9], seatAvailability, modifyAvailability)}</div>
@@ -83,8 +93,8 @@ export default function book() {
           </div>
           <div className="pricing">
             <div>
-              <div style={{ margin: "10px" }}>Seat Selected : {available.length} x 150</div>
-              <div style={{ margin: "10px" }}>Total : {available.length * 150} Rs</div>
+              <div style={{ margin: "10px" }}>Seat Selected: {available.length} x 150</div>
+              <div style={{ margin: "10px" }}>Total: {available.length * 150} Rs</div>
             </div>
             <div>
               <button className="proceed-button" onClick={() => setIsBooked(true)}>
@@ -95,18 +105,18 @@ export default function book() {
         </div>
       ) : (
         <>
-          <div style={{ padding: "20px", display: "flex", alignItems: "center" , flexDirection:"column" }}>
+          <div style={{ padding: "20px", display: "flex", alignItems: "center", flexDirection: "column" }}>
             <div className="booked-card">
-              <div style={{ padding: "20px" }}>Date : 07 / 11 / 2023</div>
-              <div style={{ padding: "20px" }}>Time : 04 : 45 PM</div>
-              <div style={{ padding: "20px" }}>Place : PVR , Aura Mall , Bhopal</div>
+              <div style={{ padding: "20px" }}>Date: 07 / 11 / 2023</div>
+              <div style={{ padding: "20px" }}>Time: 04:45 PM</div>
+              <div style={{ padding: "20px" }}>Place: PVR, Aura Mall, Bhopal</div>
               <div style={{ background: "white" }}>
-                <img width={"100%"} src={"https://static.vecteezy.com/system/resources/previews/017/059/171/original/barcode-sign-free-png.png"} />
+                <img width={"100%"} src={"https://static.vecteezy.com/system/resources/previews/017/059/171/original/barcode-sign-free-png.png"} alt="Barcode" />
               </div>
             </div>
-          <button className="proceed-button" onClick={() => router.push("/")}>
-            Back To Home
-          </button>
+            <button className="proceed-button" onClick={() => router.push("/")}>
+              Back To Home
+            </button>
           </div>
         </>
       )}

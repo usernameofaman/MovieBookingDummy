@@ -7,7 +7,8 @@ const Navbar: React.FC = () => {
     <nav className={styles.navbar}>
       <div className={styles.left}>
         <div className={styles.logo}>
-          <Image src="/logo.png" alt="Logo" width={40} height={40} />
+          {/* <Image src="/logo.png" alt="Logo" width={40} height={40} /> */}
+          BookMySeat
         </div>
       </div>
       <div className={styles.right}>
@@ -25,7 +26,7 @@ const Navbar: React.FC = () => {
             <div className={styles.route}>Contact</div>
           </Link>
           <div className={styles.profile}>
-            <Image src="/profile-icon.png" alt="Profile Icon" width={30} height={30} />
+            {/* <Image src="/profile-icon.png" alt="Profile Icon" width={30} height={30} /> */}
           </div>
         </div>
       </div>
